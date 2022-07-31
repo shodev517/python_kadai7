@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>翻訳ツール</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <h2>翻訳ツール</h2>
+
+        <label for="before_lang">翻訳前言語</label>
+        <select name="lang" id="before_lang">
+            <option value="">--選択してください。--</option>
+            <option value="en">英語</option>
+            <option value="ja">日本語</option>
+            <option value="ko">韓国語</option>
+        </select>
+        <label for="after_lang">翻訳後言語</label>
+        <select name="lang" id="after_lang">
+            <option value="">--選択してください。--</option>
+            <option value="en">英語</option>
+            <option value="ja">日本語</option>
+            <option value="ko">韓国語</option>
+        </select><br>
+        翻訳ワード<input type="text" id="word">
+        <button id='translate'>翻訳</button><br>
+        <textarea id="result" class="result_area"></textarea>
+        <script type="text/javascript" src="./eel.js"></script>
+        <script>
+            translate.addEventListener('click', () => {
+                if (before_lang.value == after_lang.value){
+                    alert("翻訳前言語と翻訳後言語は異なるものを選択してください。")
+                }
+                else if(before_lang.value == '' || after_lang.value==''){
+                    alert("翻訳前言語と翻訳後言語は両方選択してください。")
+                }
+                else{
+                    result.value=""
+                    eel.translate_word(word.value, before_lang.value, after_lang.value)
+                }   
+            })
+            eel.expose(view_log_js)
+            function view_log_js(text){
+                result.value += text + '\n'
+            }
+        </script>
+    </body>
+</html>
